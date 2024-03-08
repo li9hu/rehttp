@@ -31,6 +31,7 @@ func GlobalHttp(responseLimit, timeout int64, retryMax int) {
 	DefaultClient.Timeout = timeout
 	DefaultClient.RetryMax = retryMax
 	DefaultClient.ResponseLimit = responseLimit
+	DefaultClient.Client = initHTTP(timeout, retryMax)
 }
 
 // New 创建HTTPClient
