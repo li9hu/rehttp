@@ -26,7 +26,7 @@ func httpDefault() *HTTP {
 	return defaultHTTP
 }
 
-func GlobalHttp(h HTTP) {
+func GlobalHttp(h *HTTP) {
 	DefaultClient.Timeout = h.Timeout
 	DefaultClient.RetryMax = h.RetryMax
 	DefaultClient.ResponseLimit = h.ResponseLimit
