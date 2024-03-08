@@ -16,15 +16,21 @@ type HTTP struct {
 	RetryMax      int
 }
 
-var DefaultClient = NewDefault()
+var DefaultClient = httpDefault()
 
 // NewDefault 默认初始化的HTTP
-func NewDefault() *HTTP {
+func httpDefault() *HTTP {
 	var defaultHTTP = &HTTP{
 		Client:        initHTTP(10, 3),
 		ResponseLimit: 0,
 	}
 	return defaultHTTP
+}
+
+func GlobalHttp(responseLimit, timeout int64, retryMax int) {
+	DefaultClient.Timeout = timeout
+	DefaultClient.RetryMax = retryMax
+	DefaultClient.ResponseLimit = responseLimit
 }
 
 // New 创建HTTPClient
