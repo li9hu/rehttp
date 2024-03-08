@@ -153,8 +153,6 @@ func initHTTP(timeout int64, retryMax int) *retryablehttp.Client {
 	retryClient := retryablehttp.NewClient()
 	retryClient.Logger = nil
 	retryClient.RetryMax = retryMax
-	client := retryClient.StandardClient()
-	client.Timeout = time.Duration(timeout) * time.Second
-	retryClient.HTTPClient = client
+	retryClient.HTTPClient.Timeout = time.Duration(timeout) * time.Second
 	return retryClient
 }
