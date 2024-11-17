@@ -90,7 +90,7 @@ func (h *HTTP) Post(urlStr string, headers map[string]string, requestBody []byte
 	}
 }
 
-func Post(urlStr string, headers map[string]string, requestBody []byte) *Result {
+func RPost(urlStr string, headers map[string]string, requestBody []byte) *Result {
 	result := DefaultClient.Post(urlStr, headers, requestBody)
 	return result
 }
@@ -143,7 +143,7 @@ func (h *HTTP) Get(t string, headers map[string]string) *Result {
 	}
 }
 
-func Get(t string, headers map[string]string) *Result {
+func RGet(t string, headers map[string]string) *Result {
 	result := DefaultClient.Get(t, headers)
 	return result
 }

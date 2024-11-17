@@ -8,9 +8,9 @@ type Result struct {
 	Err          error   `json:"err,omitempty"`
 }
 
-type Request struct {
-	Data   []byte
-	URL    string
-	Header map[string]string
-	Method string
-}
+//type Request struct {
+//	Data   []byte
+//	URL    string
+//	Header map[string]string
+//	Method string
+//}
