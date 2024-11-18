@@ -2,14 +2,13 @@ package rehttp
 
 import (
 	"bytes"
-	"github.com/hashicorp/go-retryablehttp"
 	"io"
 	"net/url"
 	"time"
 )
 
 type HTTP struct {
-	Client        *retryablehttp.Client
+	Client        *Client
 	ResponseLimit int64
 	Timeout       int64
 	RetryMax      int
@@ -50,7 +49,7 @@ func (h *HTTP) Post(urlStr string, headers map[string]string, requestBody []byte
 	}
 
 	startTime := time.Now()
-	req, err := retryablehttp.NewRequest("POST", u.String(), bytes.NewBuffer(requestBody))
+	req, err := NewRequest("POST", u.String(), bytes.NewBuffer(requestBody))
 	if err != nil {
 		return &Result{URL: u.String(), Err: err}
 	}
@@ -103,7 +102,7 @@ func (h *HTTP) Get(t string, headers map[string]string) *Result {
 	}
 
 	startTime := time.Now()
-	req, err := retryablehttp.NewRequest("GET", u.String(), nil)
+	req, err := NewRequest("GET", u.String(), nil)
 	if err != nil {
 		return &Result{URL: u.String(), Err: err}
 	}
@@ -149,8 +148,8 @@ func RGet(t string, headers map[string]string) *Result {
 }
 
 // 自带请求重试的HTTPClient
-func initHTTP(timeout int64, retryMax int) *retryablehttp.Client {
-	retryClient := retryablehttp.NewClient()
+func initHTTP(timeout int64, retryMax int) *Client {
+	retryClient := NewClient()
 	retryClient.Logger = nil
 	retryClient.RetryMax = retryMax
 	retryClient.HTTPClient.Timeout = time.Duration(timeout) * time.Second
